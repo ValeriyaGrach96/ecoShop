@@ -8,7 +8,7 @@
           class="menuLogo"
         />
       </button>
-      <MenuPopup v-show="isVisiblePopup" />
+      <MenuPopup v-show="isVisiblePopup" @onClose="onClosePopup" />
     </div>
     <p>{{ namePage }}</p>
     <router-link to="/buy">
@@ -39,6 +39,7 @@ export default {
   },
   created() {
     this.getNamePage(this.$route);
+    this.isVisiblePopup = false;
   },
   watch: {
     $route(to) {
@@ -64,7 +65,10 @@ export default {
       }
     },
     onOpenPopup() {
-      this.isVisiblePopup = !this.isVisiblePopup;
+      this.isVisiblePopup = true;
+    },
+    onClosePopup() {
+      this.isVisiblePopup = false;
     },
   },
 };
@@ -88,6 +92,9 @@ export default {
 
   img {
     margin-top: 12.5px;
+  }
+  p {
+    font-weight: 600;
   }
 }
 @media screen and (max-width: 1024px) {

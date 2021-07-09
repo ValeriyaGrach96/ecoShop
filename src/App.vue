@@ -32,16 +32,33 @@ export default {
       },
     };
   },
-  mounted() {
-    window.addEventListener("resize", this.resizeWidth);
+  created() {
+    const favoritesFromLS = JSON.parse(localStorage.getItem("favorites"));
+    if (favoritesFromLS.length) {
+      favoritesFromLS.forEach((card) => {
+        this.$store.commit("setFavorite", card);
+      });
+    }
+    const cartFromLS = JSON.parse(localStorage.getItem("cart"));
+    if (cartFromLS.length) {
+      cartFromLS.forEach((card) => {
+        this.$store.commit("setInCart", card);
+      });
+    }
   },
-  destroyed() {
-    window.removeEventListener("resize", this.resizeWidth);
+  mounted() {
+    let widthWindow = window.innerWidth;
+    this.widthForMobile(widthWindow);
+    window.addEventListener("resize", this.resizeWidth);
+    window.onbeforeunload = function () {};
   },
   methods: {
     resizeWidth(evt) {
+      this.widthForMobile(evt.currentTarget.innerWidth);
+    },
+    widthForMobile() {
       this.isMobile = false;
-      if (evt.currentTarget.innerWidth < 1024) {
+      if (window.innerWidth < 1024) {
         this.isMobile = true;
       }
     },

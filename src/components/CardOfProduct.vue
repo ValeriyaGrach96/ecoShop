@@ -1,7 +1,15 @@
 <template>
   <article class="cardOfProduct">
     <section class="service">
-      <button class="likeIt">
+      <div class="promotion">
+        <p class="sale">-30%</p>
+      </div>
+      <button
+        class="likeIt"
+        type="button"
+        @click.stop="onSetFavorite"
+        :class="{ active: isActive }"
+      >
         <img src="../assets/image/icon-likeIt.svg" alt="like it" />
       </button>
     </section>
@@ -15,10 +23,9 @@
       <h2>{{ card.title }}</h2>
     </header>
     <footer>
-      <div class="buttons">
-        <button>+</button>
-        <button>-</button>
-      </div>
+      <button class="inCart" @click="onAddInCart">
+        <img src="../assets/image/icon-inCart.svg" alt="Add in cart" />
+      </button>
       <h3>{{ card.price }}$</h3>
     </footer>
   </article>
@@ -31,6 +38,21 @@ export default {
     card: {
       type: Object,
       default: () => {},
+    },
+  },
+  computed: {
+    isActive() {
+      return this.$store.getters.getFavorites.some(
+        (item) => item.id === this.card.id
+      );
+    },
+  },
+  methods: {
+    onSetFavorite() {
+      this.$store.dispatch("setFavorite", this.card);
+    },
+    onAddInCart() {
+      this.$store.dispatch("setInCart", this.card);
     },
   },
 };
@@ -53,7 +75,21 @@ export default {
   border-radius: 6px;
   .service {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    .sale {
+      background-color: @green;
+      color: @white;
+      border-radius: 4px;
+      padding: 4px;
+    }
+    .likeIt {
+      cursor: pointer;
+      &.active {
+        img {
+          content: url("../assets/image/icon-likeIt-active.svg");
+        }
+      }
+    }
   }
   h2 {
     font-size: 17px;
@@ -74,22 +110,17 @@ export default {
     padding-left: 30px;
     padding-right: 30px;
 
-    button {
-      color: @white;
-      background-color: @green;
-      border-radius: 50%;
-      width: 25px;
-      height: 25px;
-      font-size: 12px;
+    .inCart {
+      cursor: pointer;
     }
-    button + button {
-      margin-left: 15px;
-    }
+
     h3 {
       font-weight: 600;
-      font-size: 12px;
+      font-size: 16px;
       line-height: 16px;
       color: @green;
+      margin-top: auto;
+      margin-bottom: auto;
     }
   }
 }

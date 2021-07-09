@@ -1,7 +1,9 @@
 <template>
-  <nav id="nav">
-    <router-link to="/">Home</router-link>
-    <ul>
+  <nav class="nav">
+    <ul @click="$emit('onClose')">
+      <li>
+        <router-link to="/">Home</router-link>
+      </li>
       <li>
         <router-link to="/electronics">Electronics</router-link>
       </li>
@@ -25,13 +27,14 @@ export default {
 </script>
 
 <style lang="less">
-#nav {
+.nav {
   margin: auto;
   padding: 0;
   display: flex;
   justify-content: space-between;
   ul {
-    margin-left: 50px;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     justify-content: space-between;
     li {

@@ -7,9 +7,6 @@
       <router-link to="/buy" class="buyLink" exact>
         <img src="../assets/image/icon-buy.svg" alt="buy" />
       </router-link>
-      <router-link to="/search" class="searchLink" exact>
-        <img src="../assets/image/icon-search.svg" alt="search" />
-      </router-link>
       <router-link to="/favorites" class="favoritesLink" exact>
         <img src="../assets/image/icon-favorites.svg" alt="favorites" />
       </router-link>
@@ -57,11 +54,6 @@ export default {
     .buyLink.router-link-exact-active {
       img {
         content: url("../assets/image/icon-buy-active.svg");
-      }
-    }
-    .searchLink.router-link-exact-active {
-      img {
-        content: url("../assets/image/icon-search-active.svg");
       }
     }
     .favoritesLink.router-link-exact-active {

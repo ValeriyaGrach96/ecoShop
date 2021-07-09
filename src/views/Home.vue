@@ -19,37 +19,12 @@ export default {
   },
   data() {
     return {
-      products: {
-        type: Array,
-        default: [],
-      },
+      products: [],
     };
   },
   async mounted() {
     this.products = await productService.getCardsData();
   },
+  beforeDestroy() {},
 };
 </script>
-
-<style lang="less">
-.home {
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    justify-content: space-around;
-  }
-  li {
-    align-items: flex-start;
-    margin: 0;
-    padding: 12.5px;
-    text-align: center;
-  }
-}
-@media screen and (max-width: 1024px) {
-  .home {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-</style>

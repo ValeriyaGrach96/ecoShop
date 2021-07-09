@@ -38,5 +38,8 @@ export default {
   .buy {
     margin-left: 25px;
   }
+  li + li {
+    margin-left: 50px;
+  }
 }
 </style>

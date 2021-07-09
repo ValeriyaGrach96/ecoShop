@@ -44,9 +44,6 @@ ul {
   li {
     margin: auto;
   }
-  li + li {
-    margin-left: 50px;
-  }
 }
 a {
   text-align: center;
@@ -55,6 +52,7 @@ a {
   text-decoration: none;
   &.router-link-exact-active {
     color: @black;
+    font-weight: 600;
   }
 }
 input,
@@ -65,30 +63,50 @@ h3, h2 {
   padding: 0;
   color: @black;
 }
+.menuPopup {
+  margin: 0;
+  padding: 25px;
 
+  position: absolute;
+  top: -50px;
+  left: -25px;
+  width: 100vw;
+  height: 100vh;
 
-// .simpleLink(@nonVisited: @greydark, @visited: @black) {
-//   color: @nonVisited;
-//   text-decoration: none;
-
-//   &.router-link-exact-active {
-//     color: @black;
-//   }
-// }
-// .margin(@margin: none) {
-//   margin: @margin;
-// }
-// .padding(@padding: none) {
-//   padding: @padding;
-// }
-// .colorBackground(@color: @black, @background: @whitedark) {
-//   color: @color;
-//   background-color: @background;
-// }
-// .spaceBeetwenRow() {
-//   display: flex;
-//   justify-content: space-between;
-// }
-// .simpleList() {
-//   list-style-type: none;
-// }
+  background-color: @white;
+}
+img {
+  margin: 0;
+  vertical-align: middle;
+  text-align: center;
+}
+.home,
+.electronics,
+.jewelery,
+.mens,
+.womens,
+.favorites {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-around;
+  }
+  li {
+    align-items: flex-start;
+    margin: 0;
+    padding: 12.5px;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .home,
+  .electronics,
+  .jewelery,
+  .mens,
+  .womens,
+  .favorites {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

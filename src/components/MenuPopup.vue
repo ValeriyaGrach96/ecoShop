@@ -1,18 +1,21 @@
 <template>
   <div class="menuPopup">
     <article>
-      <Navigation />
+      <ButtonClose @onClose="$emit('onClose')" />
+      <Navigation @onClose="$emit('onClose')" />
     </article>
   </div>
 </template>
 
 <script>
 import Navigation from "./Navigation.vue";
+import ButtonClose from "./ButtonClose.vue";
 
 export default {
   name: "MenuPopup",
   components: {
     Navigation,
+    ButtonClose,
   },
 };
 </script>
@@ -20,12 +23,21 @@ export default {
 <style lang="less">
 @white: #ffffff;
 .menuPopup {
-  position: absolute;
-  top: -50px;
-  left: -25px;
-  width: 100vw;
-  height: 100vh;
-
-  background-color: @white;
+  .closeButton {
+    top: 0;
+    left: 47%;
+  }
+  ul {
+    flex-direction: column;
+    li + li {
+      margin-top: 25px;
+    }
+  }
+  .nav {
+    text-align: center;
+    ul {
+      margin-top: 100px;
+    }
+  }
 }
 </style>
