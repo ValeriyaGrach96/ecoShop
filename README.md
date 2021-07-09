@@ -1,4 +1,5 @@
-# ishop
+# ecoshop
+This project was created for to gain the skills to work with Vuex and Vue Router.
 
 ## Project setup
 ```
