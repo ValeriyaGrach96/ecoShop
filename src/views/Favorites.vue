@@ -5,6 +5,9 @@
         <CardOfProduct :card="card" />
       </li>
     </ul>
+    <footer v-if="!favorites.length" class="emtyFooter">
+      <p>You don't have a favorites products :(</p>
+    </footer>
   </div>
 </template>
 
@@ -23,3 +26,19 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+@greydark: #828282;
+
+.emtyFooter {
+  text-align: center;
+  height: 100%;
+
+  p {
+    margin-top: 20%;
+    margin-bottom: auto;
+    color: @greydark;
+    font-weight: 600;
+  }
+}
+</style>

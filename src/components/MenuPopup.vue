@@ -23,6 +23,7 @@ export default {
 <style lang="less">
 @white: #ffffff;
 .menuPopup {
+  z-index: 1;
   .closeButton {
     top: 0;
     left: 47%;

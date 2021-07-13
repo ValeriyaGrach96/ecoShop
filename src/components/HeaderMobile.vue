@@ -11,30 +11,43 @@
       <MenuPopup v-show="isVisiblePopup" @onClose="onClosePopup" />
     </div>
     <p>{{ namePage }}</p>
-    <router-link to="/buy">
+    <router-link to="/buy" class="toCart">
       <img src="../assets/image/buy.svg" alt="buy" class="buy" />
+      <Indicator />
     </router-link>
   </header>
 </template>
 
 <script>
+import Indicator from "./Indicator.vue";
 import MenuPopup from "./MenuPopup.vue";
+import productService from "../api/api";
+
+const NAMES_LIST = {
+  electronics: "Electronics",
+  jewelery: "Jewelery",
+  mens: "Men's Clothing",
+  womens: "Women's Clothing",
+  buy: "Cart",
+  search: "Search",
+  favorites: "Favorites",
+  user: "User page",
+  async nameProducst(cardID) {
+    const titleCard = await productService.getOnlyProduct(cardID);
+    return titleCard.title;
+  },
+};
 
 export default {
   components: {
     MenuPopup,
+    Indicator,
   },
   name: "HeaderMobile",
   data() {
     return {
-      namePage: {
-        type: String,
-        default: () => {},
-      },
-      isVisiblePopup: {
-        type: Boolean,
-        default: false,
-      },
+      namePage: "",
+      isVisiblePopup: false,
     };
   },
   created() {
@@ -48,20 +61,14 @@ export default {
   },
   methods: {
     getNamePage(location) {
-      const namesList = {
-        electronics: "Electronics",
-        jewelery: "Jewelery",
-        mens: "Men's Clothing",
-        womens: "Women's Clothing",
-        buy: "Cart",
-        search: "Search",
-        favorites: "Favorites",
-        user: "User page",
-      };
       let path = location.path.slice(1);
+      const cardIndex = path.lastIndexOf("/");
       this.namePage = "Home";
-      if (path) {
-        this.namePage = namesList[path];
+      if (path && cardIndex === -1) {
+        this.namePage = NAMES_LIST[path];
+      } else if (path) {
+        const cardId = path.slice([cardIndex]);
+        NAMES_LIST.nameProducst(cardId).then((name) => (this.namePage = name));
       }
     },
     onOpenPopup() {
@@ -95,6 +102,13 @@ export default {
   }
   p {
     font-weight: 600;
+  }
+  .toCart {
+    position: relative;
+    .indicator {
+      top: 11px;
+      left: 18px;
+    }
   }
 }
 @media screen and (max-width: 1024px) {

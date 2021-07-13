@@ -3,7 +3,6 @@
     <HeaderMobile v-if="isMobile" />
     <HeaderDesktop v-else />
     <main>
-      <SearchPanel />
       <router-view />
     </main>
     <UserPanel v-if="isMobile" />
@@ -13,7 +12,6 @@
 <script>
 import HeaderMobile from "./components/HeaderMobile.vue";
 import HeaderDesktop from "./components/HeaderDesktop.vue";
-import SearchPanel from "./components/SearchPanel.vue";
 import UserPanel from "./components/UserPanel.vue";
 
 export default {
@@ -21,18 +19,14 @@ export default {
   components: {
     HeaderMobile,
     HeaderDesktop,
-    SearchPanel,
     UserPanel,
   },
   data() {
     return {
-      isMobile: {
-        type: Boolean,
-        default: false,
-      },
+      isMobile: false,
     };
   },
-  created() {
+  async created() {
     const favoritesFromLS = JSON.parse(localStorage.getItem("favorites"));
     if (favoritesFromLS.length) {
       favoritesFromLS.forEach((card) => {
@@ -50,7 +44,9 @@ export default {
     let widthWindow = window.innerWidth;
     this.widthForMobile(widthWindow);
     window.addEventListener("resize", this.resizeWidth);
-    window.onbeforeunload = function () {};
+    window.onbeforeunload = function () {
+      window.removeEventListener("resize", this.resizeWidth);
+    };
   },
   methods: {
     resizeWidth(evt) {

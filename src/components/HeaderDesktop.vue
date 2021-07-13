@@ -6,17 +6,20 @@
     <Navigation />
     <router-link to="/buy">
       <img src="../assets/image/buy.svg" alt="buy" class="buy" />
+      <Indicator />
     </router-link>
   </header>
 </template>
 
 <script>
+import Indicator from './Indicator.vue';
 import Navigation from "./Navigation.vue";
 
 export default {
   name: "HeaderDesktop",
   components: {
     Navigation,
+    Indicator,
   },
 };
 </script>
@@ -29,8 +32,14 @@ export default {
   padding: 25px;
   height: 100px;
   a {
+    position: relative;
     margin-top: auto;
     margin-bottom: auto;
+
+    .indicator {
+      top: 0px;
+      left: 85%;
+    }
   }
   .logo {
     margin-right: 25px;

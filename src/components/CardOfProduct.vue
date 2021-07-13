@@ -2,18 +2,18 @@
   <article class="cardOfProduct">
     <section class="service">
       <div class="promotion">
-        <p class="sale">-30%</p>
+        <p v-if="card.discount" class="sale">{{ card.discount }}%</p>
       </div>
       <button
         class="likeIt"
         type="button"
-        @click.stop="onSetFavorite"
         :class="{ active: isActive }"
+        @click.stop="onSetFavorite"
       >
         <img src="../assets/image/icon-likeIt.svg" alt="like it" />
       </button>
     </section>
-    <header>
+    <router-link :to="productLink">
       <img
         :src="card.image"
         alt="image of product"
@@ -21,10 +21,14 @@
         height="110px"
       />
       <h2>{{ card.title }}</h2>
-    </header>
+    </router-link>
     <footer>
-      <button class="inCart" @click="onAddInCart">
-        <img src="../assets/image/icon-inCart.svg" alt="Add in cart" />
+      <button class="inCart" @click.stop="onAddInCart">
+        <img
+          src="../assets/image/icon-inCart.svg"
+          alt="Add in cart"
+          :class="{ active: isInCart }"
+        />
       </button>
       <h3>{{ card.price }}$</h3>
     </footer>
@@ -41,8 +45,16 @@ export default {
     },
   },
   computed: {
+    productLink() {
+      return `/product/${this.card.id}`;
+    },
     isActive() {
       return this.$store.getters.getFavorites.some(
+        (item) => item.id === this.card.id
+      );
+    },
+    isInCart() {
+      return this.$store.getters.getCart.some(
         (item) => item.id === this.card.id
       );
     },
@@ -112,6 +124,9 @@ export default {
 
     .inCart {
       cursor: pointer;
+      img.active {
+        content: url("../assets/image/icon-inCart-active.svg");
+      }
     }
 
     h3 {

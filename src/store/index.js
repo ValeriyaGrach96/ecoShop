@@ -26,9 +26,19 @@ export default new Vuex.Store({
           item.amount = 1;
         }
         state.cart.push(item);
-      } else {
-        state.cart[indexCard].amount++;
       }
+    },
+    setOutCart(state, item) {
+      const indexCard = state.cart.findIndex((card) => card.id === item.id);
+      let amountCard = state.cart[indexCard].amount;
+      if (amountCard !== 1) {
+        state.cart[indexCard].amount--;
+      } else {
+        state.cart = state.cart.filter((_, idx) => idx !== indexCard);
+      }
+    },
+    setAmount(state, idx) {
+      state.cart[idx].amount += 1;
     },
   },
   getters: {
@@ -38,10 +48,18 @@ export default new Vuex.Store({
     getCart(state) {
       return state.cart;
     },
+    getCartHasItems(state) {
+      return state.cart.length > 0;
+    },
   },
   actions: {
     saveToLocalStorage({ state }, nameOfData) {
-      localStorage.setItem(`${nameOfData}`, JSON.stringify(state[nameOfData]));
+      if (localStorage) {
+        localStorage.setItem(
+          `${nameOfData}`,
+          JSON.stringify(state[nameOfData])
+        );
+      }
     },
     setFavorite({ dispatch, commit }, cardOfProduct) {
       commit("setFavorite", cardOfProduct);
@@ -49,6 +67,16 @@ export default new Vuex.Store({
     },
     setInCart({ dispatch, commit }, cardOfProduct) {
       commit("setInCart", cardOfProduct);
+      dispatch("saveToLocalStorage", "cart");
+    },
+    setOutCart({ dispatch, commit }, cardOfProduct) {
+      commit("setOutCart", cardOfProduct);
+      dispatch("saveToLocalStorage", "cart");
+    },
+    increaseAmount({ dispatch, commit, state }, card) {
+      debugger;
+      const indexCard = state.cart.findIndex((item) => item.id === card.id);
+      commit("setAmount", indexCard);
       dispatch("saveToLocalStorage", "cart");
     },
   },

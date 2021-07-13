@@ -1,8 +1,7 @@
 const productService = {
   getCardsData: async () => {
     const response = await fetch("https://fakestoreapi.com/products");
-    const result = await response.json();
-    return result;
+    return response.json();
   },
   getCategories: async () => {
     const response = await fetch(
@@ -38,6 +37,10 @@ const productService = {
     );
     const result = await response.json();
     return result;
+  },
+  async getOnlyProduct(cardId) {
+    const response = await fetch(`https://fakestoreapi.com/products/${cardId}`);
+    return await response.json();
   },
 };
 

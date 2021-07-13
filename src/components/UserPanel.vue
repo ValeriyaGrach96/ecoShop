@@ -1,11 +1,12 @@
 <template>
-  <article id="userPanel">
+  <article class="userPanel">
     <nav>
       <router-link to="/" class="homeLink" exact>
         <img src="../assets/image/icon-home.svg" alt="home" />
       </router-link>
       <router-link to="/buy" class="buyLink" exact>
         <img src="../assets/image/icon-buy.svg" alt="buy" />
+        <Indicator v-show="isFullCart" />
       </router-link>
       <router-link to="/favorites" class="favoritesLink" exact>
         <img src="../assets/image/icon-favorites.svg" alt="favorites" />
@@ -18,16 +19,24 @@
 </template>
 
 <script>
+import Indicator from "./Indicator.vue";
 export default {
   name: "UserPanel",
+  components: { Indicator },
+  computed: {
+    isFullCart() {
+      return this.$store.getters.getCartHasItems;
+    },
+  },
 };
 </script>
 
 <style lang="less">
 @white: #ffffff;
 @green: #38972e;
-#userPanel {
+.userPanel {
   position: fixed;
+  z-index: 2;
   top: calc(100% - 64px);
   left: 0px;
 
@@ -46,6 +55,13 @@ export default {
     display: flex;
     justify-content: space-around;
 
+    .buyLink {
+      position: relative;
+      .indicator {
+        top: 20px;
+        left: 21px;
+      }
+    }
     .homeLink.router-link-exact-active {
       img {
         content: url("../assets/image/icon-home-active.svg");
