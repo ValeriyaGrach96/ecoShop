@@ -4,22 +4,47 @@
       <img src="../assets/image/logo.svg" alt="logo" class="logo" />
     </router-link>
     <Navigation />
-    <router-link to="/buy">
-      <img src="../assets/image/buy.svg" alt="buy" class="buy" />
-      <Indicator />
-    </router-link>
+    <UserPopup v-show="isOpenUserPopup" @onClosePopup="onClosePopup" />
+    <button
+      type="button"
+      aria-label="users navigation"
+      class="usersNavigation"
+      @click.stop="onOpenUserPopup"
+    >
+      <img src="../assets/image/user.svg" alt="user" />
+    </button>
   </header>
 </template>
 
 <script>
-import Indicator from './Indicator.vue';
 import Navigation from "./Navigation.vue";
+import UserPopup from "./UserPopup.vue";
 
 export default {
   name: "HeaderDesktop",
   components: {
     Navigation,
-    Indicator,
+    UserPopup,
+  },
+  data() {
+    return {
+      isOpenUserPopup: false,
+    };
+  },
+  watch: {
+    $route(to) {
+      if (to) {
+        this.isOpenUserPopup = false;
+      }
+    },
+  },
+  methods: {
+    onOpenUserPopup() {
+      this.isOpenUserPopup = !this.isOpenUserPopup;
+    },
+    onClosePopup() {
+      this.isOpenUserPopup = false;
+    },
   },
 };
 </script>
@@ -28,6 +53,7 @@ export default {
 .headerDesktop {
   display: flex;
   justify-content: space-between;
+  position: relative;
 
   padding: 25px;
   height: 100px;
@@ -35,17 +61,14 @@ export default {
     position: relative;
     margin-top: auto;
     margin-bottom: auto;
-
-    .indicator {
-      top: 0px;
-      left: 85%;
-    }
   }
   .logo {
     margin-right: 25px;
   }
-  .buy {
+  .usersNavigation {
     margin-left: 25px;
+    cursor: pointer;
+    padding: 15px;
   }
   li + li {
     margin-left: 50px;

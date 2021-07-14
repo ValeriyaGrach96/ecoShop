@@ -9,6 +9,7 @@
         type="button"
         :class="{ active: isActive }"
         @click.stop="onSetFavorite"
+        aria-label="add this product in favorite list"
       >
         <img src="../assets/image/icon-likeIt.svg" alt="like it" />
       </button>

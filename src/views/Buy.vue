@@ -8,7 +8,6 @@
     <footer v-if="cartHasItems" class="totalPrice">
       <hr />
       <p>Total price: {{ totalPrice }}$</p>
-      {{ $store.state.cart }}
     </footer>
     <footer v-else class="emtyFooter">
       <p>Your cart is emty :(</p>

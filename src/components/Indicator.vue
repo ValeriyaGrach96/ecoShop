@@ -1,15 +1,10 @@
 <template>
-  <div v-show="isFullCart" class="indicator"></div>
+  <div class="indicator"></div>
 </template>
 
 <script>
 export default {
   name: "Indicator",
-  computed: {
-    isFullCart() {
-      return this.$store.getters.getCartHasItems;
-    },
-  },
 };
 </script>
 

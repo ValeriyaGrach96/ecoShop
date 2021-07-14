@@ -37,8 +37,15 @@ export default new Vuex.Store({
         state.cart = state.cart.filter((_, idx) => idx !== indexCard);
       }
     },
-    setAmount(state, idx) {
-      state.cart[idx].amount += 1;
+    setAmount(state, card) {
+      let copy = [...state.cart];
+      const idx = copy.findIndex((item) => {
+        return card.id === item.id;
+      });
+      let tempItem = { ...copy[idx] };
+      tempItem.amount += 1;
+      copy[idx] = tempItem;
+      state.cart = copy;
     },
   },
   getters: {
@@ -73,10 +80,8 @@ export default new Vuex.Store({
       commit("setOutCart", cardOfProduct);
       dispatch("saveToLocalStorage", "cart");
     },
-    increaseAmount({ dispatch, commit, state }, card) {
-      debugger;
-      const indexCard = state.cart.findIndex((item) => item.id === card.id);
-      commit("setAmount", indexCard);
+    increaseAmount({ dispatch, commit }, card) {
+      commit("setAmount", card);
       dispatch("saveToLocalStorage", "cart");
     },
   },

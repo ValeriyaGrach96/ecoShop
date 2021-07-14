@@ -1,5 +1,10 @@
 <template>
-  <button type="button" class="closeButton" @click.stop="$emit('onClose')">
+  <button
+    type="button"
+    class="closeButton"
+    @click.stop="$emit('onClose')"
+    aria-label="close"
+  >
     <img
       src="../assets/image/closeButton.svg"
       alt="Close window"

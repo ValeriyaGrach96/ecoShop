@@ -1,7 +1,7 @@
 <template>
   <header class="headerMobile">
     <div class="menu">
-      <button type="button" class="menuButton" @click="onOpenPopup">
+      <button type="button" class="menuButton" @click="onOpenPopup" aria-label="open navigetions menu">
         <img
           src="../assets/image/icon-categories-menu.svg"
           alt="categories menu"
@@ -13,7 +13,7 @@
     <p>{{ namePage }}</p>
     <router-link to="/buy" class="toCart">
       <img src="../assets/image/buy.svg" alt="buy" class="buy" />
-      <Indicator />
+      <Indicator v-show="isFullCart" />
     </router-link>
   </header>
 </template>
@@ -57,6 +57,11 @@ export default {
   watch: {
     $route(to) {
       this.getNamePage(to);
+    },
+  },
+  computed: {
+    isFullCart() {
+      return this.$store.getters.getCartHasItems;
     },
   },
   methods: {

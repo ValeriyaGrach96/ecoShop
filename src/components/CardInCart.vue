@@ -20,8 +20,16 @@
       <p>{{ card.amount }}</p>
     </div>
     <div class="buttonsWrapper">
-      <button type="button" @click="onIncreaseAmount">+</button>
-      <button type="button" @click="onSetOutCart">-</button>
+      <button
+        type="button"
+        @click="onIncreaseAmount"
+        aria-label="increase amount"
+      >
+        +
+      </button>
+      <button type="button" @click="onSetOutCart" aria-label="reduce amount">
+        -
+      </button>
     </div>
   </article>
 </template>
@@ -35,15 +43,6 @@ export default {
       default: () => {},
     },
   },
-  // watch: {
-  //   "this.$store.state.cart"(newValue) {
-  //     newValue.forEach((item) => {
-  //       if (item.id === this.card.id) {
-  //         this.finalPrice();
-  //       }
-  //     });
-  //   },
-  // },
   computed: {
     finalPrice() {
       return Math.round(this.card.finalPrice * this.card.amount * 100) / 100;
@@ -52,8 +51,7 @@ export default {
   methods: {
     onIncreaseAmount() {
       debugger;
-      //this.$store.dispatch("increaseAmount", this.card);
-      this.$store.commit("setAmount", 0);
+      this.$store.dispatch("increaseAmount", this.card);
     },
     onSetOutCart() {
       this.$store.dispatch("setOutCart", this.card);
