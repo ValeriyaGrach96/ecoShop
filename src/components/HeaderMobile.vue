@@ -1,7 +1,12 @@
 <template>
   <header class="headerMobile">
     <div class="menu">
-      <button type="button" class="menuButton" @click="onOpenPopup" aria-label="open navigetions menu">
+      <button
+        type="button"
+        class="menuButton"
+        @click="onOpenPopup"
+        aria-label="open navigetions menu"
+      >
         <img
           src="../assets/image/icon-categories-menu.svg"
           alt="categories menu"

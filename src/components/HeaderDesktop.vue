@@ -4,12 +4,15 @@
       <img src="../assets/image/logo.svg" alt="logo" class="logo" />
     </router-link>
     <Navigation />
-    <UserPopup v-show="isOpenUserPopup" @onClosePopup="onClosePopup" />
+    <UserPopup
+      @onClosePopup="onToggleUserPopup"
+      :class="{ visible: isOpenUserPopup }"
+    />
     <button
       type="button"
       aria-label="users navigation"
       class="usersNavigation"
-      @click.stop="onOpenUserPopup"
+      @click.stop="onToggleUserPopup"
     >
       <img src="../assets/image/user.svg" alt="user" />
     </button>
@@ -39,11 +42,8 @@ export default {
     },
   },
   methods: {
-    onOpenUserPopup() {
+    onToggleUserPopup() {
       this.isOpenUserPopup = !this.isOpenUserPopup;
-    },
-    onClosePopup() {
-      this.isOpenUserPopup = false;
     },
   },
 };

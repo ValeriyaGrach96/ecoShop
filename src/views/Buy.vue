@@ -25,11 +25,11 @@ export default {
   },
   computed: {
     cart() {
-      return this.$store.getters.getCart;
+      return this.$store.state.cart;
     },
     totalPrice() {
       let totalPrice = 0;
-      this.$store.getters.getCart.forEach((card) => {
+      this.$store.state.cart.forEach((card) => {
         totalPrice += card.finalPrice * card.amount;
       });
       return Math.round(totalPrice * 100) / 100;

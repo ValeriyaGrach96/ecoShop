@@ -1,25 +1,16 @@
 <template>
-  <div class="womens">
-    <SearchPanel />
-    <ul>
-      <li v-for="card of products" :key="card.id">
-        <CardOfProduct :card="card" />
-      </li>
-    </ul>
-  </div>
+  <ContentWrapper :products="products" />
 </template>
 
 <script>
-import CardOfProduct from "../components/CardOfProduct.vue";
-import SearchPanel from "../components/SearchPanel.vue";
 import productService from "../api/api";
 import stoke from "../api/stoke";
+import ContentWrapper from "../components/ContentWrapper.vue";
 
 export default {
   name: "Womens",
   components: {
-    CardOfProduct,
-    SearchPanel,
+    ContentWrapper,
   },
   data() {
     return {

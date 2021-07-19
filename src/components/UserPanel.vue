@@ -22,7 +22,7 @@ export default {
 
   height: 65px;
   width: 100%;
-  box-shadow: 0px -4px 30px rgba(0, 0, 0, 0.07);
+  box-shadow: 0px 8px 10px rgba(65, 65, 56, 0.14);
 
   background-color: @white;
   border-top-left-radius: 20px;

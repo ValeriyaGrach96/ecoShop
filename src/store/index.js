@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isMobile: false,
     favorites: [],
     cart: [],
   },
@@ -47,14 +48,11 @@ export default new Vuex.Store({
       copy[idx] = tempItem;
       state.cart = copy;
     },
+    setMobileView(state, mobileView) {
+      state.isMobile = mobileView;
+    },
   },
   getters: {
-    getFavorites(state) {
-      return state.favorites;
-    },
-    getCart(state) {
-      return state.cart;
-    },
     getCartHasItems(state) {
       return state.cart.length > 0;
     },

@@ -43,10 +43,16 @@ export default {
   mounted() {
     let widthWindow = window.innerWidth;
     this.widthForMobile(widthWindow);
+    this.setMobileInStore();
     window.addEventListener("resize", this.resizeWidth);
     window.onbeforeunload = function () {
       window.removeEventListener("resize", this.resizeWidth);
     };
+  },
+  watch: {
+    isMobile() {
+      this.setMobileInStore();
+    },
   },
   methods: {
     resizeWidth(evt) {
@@ -57,6 +63,9 @@ export default {
       if (window.innerWidth < 1024) {
         this.isMobile = true;
       }
+    },
+    setMobileInStore() {
+      this.$store.commit("setMobileView", this.isMobile);
     },
   },
 };

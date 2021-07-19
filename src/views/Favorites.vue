@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     favorites() {
-      return this.$store.getters.getFavorites;
+      return this.$store.state.favorites;
     },
   },
 };

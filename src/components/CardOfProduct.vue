@@ -50,14 +50,12 @@ export default {
       return `/product/${this.card.id}`;
     },
     isActive() {
-      return this.$store.getters.getFavorites.some(
+      return this.$store.state.favorites.some(
         (item) => item.id === this.card.id
       );
     },
     isInCart() {
-      return this.$store.getters.getCart.some(
-        (item) => item.id === this.card.id
-      );
+      return this.$store.state.cart.some((item) => item.id === this.card.id);
     },
   },
   methods: {
