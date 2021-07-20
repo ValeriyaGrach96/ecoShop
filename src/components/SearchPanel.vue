@@ -108,15 +108,23 @@ export default {
       isVisibleFilters: false,
     };
   },
+  computed: {
+    isMobile() {
+      return this.$store.state.isMobile;
+    },
+  },
   watch: {
     filterName() {
       this.$emit("onFilteredName", this.filterName.toLowerCase());
     },
   },
-  computed: {
-    isMobile() {
-      return this.$store.state.isMobile;
-    },
+  mounted() {
+    const filter = this.$store.state.filter;
+    if (Object.keys(filter).length) {
+      this.filterName = filter.filterName;
+      this.isDiscount = filter.isDiscount;
+    }
+    this.getMaxAndMinPrices();
   },
   methods: {
     onToggleSortList() {
@@ -132,9 +140,17 @@ export default {
     },
     onToggleFilters() {
       this.isVisibleFilters = !this.isVisibleFilters;
+      this.getMaxAndMinPrices();
     },
     onNewPrices() {
       this.$emit("setPrices", this.minPrice, this.maxPrice);
+    },
+    getMaxAndMinPrices() {
+      debugger;
+      let filter = Object.keys(this.$store.state.filter);
+      if (this.isVisibleFilters && !filter.length) {
+        this.$emit("getMaxAndMinPrices");
+      }
     },
   },
 };

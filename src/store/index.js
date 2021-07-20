@@ -8,6 +8,7 @@ export default new Vuex.Store({
     isMobile: false,
     favorites: [],
     cart: [],
+    filter: {},
   },
   mutations: {
     setFavorite(state, item) {
@@ -50,6 +51,9 @@ export default new Vuex.Store({
     },
     setMobileView(state, mobileView) {
       state.isMobile = mobileView;
+    },
+    setFilter(state, filter) {
+      state.filter = filter;
     },
   },
   getters: {

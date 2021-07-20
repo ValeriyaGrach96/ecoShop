@@ -7,6 +7,7 @@
       @onChangeSort="onChangeSort"
       @onIsDiscount="onIsDiscount"
       @setPrices="setPrices"
+      @getMaxAndMinPrices="getMaxAndMinPrices"
     />
     <ul>
       <li v-for="card of filteredProduct" :key="card.id">
@@ -64,13 +65,27 @@ export default {
       }
       return filteredProduct;
     },
-    getPricesFromCard() {
-      return this.filteredProduct.map((card) => card.price);
-    },
   },
-  // beforeUpdate() {
-  //   this.getMaxAndMinPrices();
-  // },
+  mounted() {
+    const filter = this.$store.state.filter;
+    if (Object.keys(filter).length) {
+      this.filterName = filter.filterName;
+      this.isDiscount = filter.isDiscount;
+      this.isSortByAscending = filter.isSortByAscending;
+      this.maxPrice = filter.maxPrice;
+      this.minPrice = filter.minPrice;
+    }
+  },
+  beforeDestroy() {
+    const filter = {
+      filterName: this.filterName,
+      isSortByAscending: this.isSortByAscending,
+      isDiscount: this.isDiscount,
+      maxPrice: this.maxPrice,
+      minPrice: this.minPrice,
+    };
+    this.$store.commit("setFilter", filter);
+  },
   methods: {
     onFilteredName(filterName) {
       this.filterName = filterName;
@@ -100,7 +115,6 @@ export default {
     getMaxAndMinPrices() {
       this.maxPrice = 0;
       this.minPrice = Infinity;
-      debugger;
       this.products.forEach((card) => {
         if (card.price > this.maxPrice) {
           this.maxPrice = card.price;
