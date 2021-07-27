@@ -4,7 +4,7 @@
 
 <script>
 import productService from "../api/api";
-import stoke from "../api/stoke";
+import stoke from "../utils/stoke";
 import ContentWrapper from "../components/ContentWrapper.vue";
 
 export default {

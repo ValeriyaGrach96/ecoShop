@@ -4,7 +4,7 @@
 
 <script>
 import productService from "../api/api";
-import stoke from "../api/stoke";
+import stoke from "../utils/stoke";
 import ContentWrapper from "../components/ContentWrapper.vue";
 
 export default {
@@ -18,7 +18,11 @@ export default {
     };
   },
   async mounted() {
-    this.products = await productService.getCardsData();
+    try {
+      this.products = await productService.getCardsData();
+    } catch (err) {
+      console.error(err);
+    }
     this.products.forEach((card) => {
       stoke.setDiscount(card);
       stoke.setFinalPrice(card);

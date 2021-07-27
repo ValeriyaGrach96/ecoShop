@@ -50,7 +50,6 @@ export default {
   },
   methods: {
     onIncreaseAmount() {
-      debugger;
       this.$store.dispatch("increaseAmount", this.card);
     },
     onSetOutCart() {

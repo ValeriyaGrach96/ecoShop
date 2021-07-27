@@ -32,7 +32,7 @@
 <script>
 import productService from "../api/api";
 import ButtonClose from "../components/ButtonClose.vue";
-import stoke from "../api/stoke";
+import stoke from "../utils/stoke";
 
 export default {
   name: "ProductPage",

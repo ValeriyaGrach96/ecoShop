@@ -1,6 +1,8 @@
 # ecoshop
 This project was created for to gain the skills to work with Vuex and Vue Router.
-
+Login: mor_2314;
+Password: 83r5^_;
+API from https://fakestoreapi.com/docs;
 ## Project setup
 ```
 npm install

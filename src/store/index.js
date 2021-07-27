@@ -9,6 +9,7 @@ export default new Vuex.Store({
     favorites: [],
     cart: [],
     filter: {},
+    user: {},
   },
   mutations: {
     setFavorite(state, item) {
@@ -55,6 +56,9 @@ export default new Vuex.Store({
     setFilter(state, filter) {
       state.filter = filter;
     },
+    setUser(state, user) {
+      state.user = user;
+    },
   },
   getters: {
     getCartHasItems(state) {
@@ -85,6 +89,10 @@ export default new Vuex.Store({
     increaseAmount({ dispatch, commit }, card) {
       commit("setAmount", card);
       dispatch("saveToLocalStorage", "cart");
+    },
+    setUser({ dispatch, commit }, user) {
+      commit("setUser", user);
+      dispatch("saveToLocalStorage", "user");
     },
   },
   modules: {},

@@ -35,12 +35,28 @@ const productService = {
     const response = await fetch(
       "https://fakestoreapi.com/products/category/women's clothing"
     );
-    const result = await response.json();
-    return result;
+    return response.json();
   },
   async getOnlyProduct(cardId) {
     const response = await fetch(`https://fakestoreapi.com/products/${cardId}`);
-    return await response.json();
+    return response.json();
+  },
+  async setLogIn(username, password) {
+    const response = await fetch("https://fakestoreapi.com/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+    return response.json();
+  },
+  async getUserData(login, password) {
+    const response = await fetch("https://fakestoreapi.com/users");
+    const json = await response.json();
+    return json.find(
+      (user) => user.username === login && user.password === password
+    );
   },
 };
 

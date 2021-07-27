@@ -146,7 +146,6 @@ export default {
       this.$emit("setPrices", this.minPrice, this.maxPrice);
     },
     getMaxAndMinPrices() {
-      debugger;
       let filter = Object.keys(this.$store.state.filter);
       if (this.isVisibleFilters && !filter.length) {
         this.$emit("getMaxAndMinPrices");

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import authLogic from "../utils/authLogic";
 
 Vue.use(VueRouter);
 
@@ -55,6 +56,12 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/User.vue"),
   },
   {
+    path: "/login",
+    name: "Login",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Login.vue"),
+  },
+  {
     path: "/product/:id",
     name: "proguctPage",
     component: () => import("../views/ProductPage.vue"),
@@ -65,6 +72,15 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const token = authLogic.getCookie();
+  if (to.name === "User" && (!token || token === "undefined"))
+    next({ name: "Login" });
+  if (to.name === "Login" && token && token !== "undefined")
+    next({ name: "User" });
+  else next();
 });
 
 export default router;
