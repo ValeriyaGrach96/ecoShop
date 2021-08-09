@@ -1,4 +1,5 @@
 # ecoshop
+Application deployed here: https://vibrant-hopper-34f47d.netlify.app
 This project was created for to gain the skills to work with Vuex and Vue Router.
 Login: mor_2314;
 Password: 83r5^_;
